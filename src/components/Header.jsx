@@ -1,7 +1,11 @@
+import { CardHistory } from "./CardHistory";
 import styles from "./Header.module.css";
+import { SelectCountry } from "./SelectCountry.";
 
 export function Header() {
   return (
+    <div>
+
     <header className={styles.header}>
       <ul>
         <li>
@@ -15,5 +19,9 @@ export function Header() {
         </li>
       </ul>
     </header>
+    <SelectCountry/>
+    <CardHistory/>
+    </div>
+
   );
 }

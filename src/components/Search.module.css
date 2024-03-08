@@ -10,7 +10,7 @@
 
 h3 {
   color: white;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   font-size: 24px;
   margin: 10px;
 }
@@ -38,7 +38,7 @@ h3 {
 .icon {
   position: absolute;
   top: 50%;
-  right: 20px; /* Distância do ícone à borda direita */
+  right: 20px; 
   transform: translateY(-50%);
   color: white;
 
