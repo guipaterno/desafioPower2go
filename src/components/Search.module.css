@@ -1,0 +1,53 @@
+.form {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  width: auto;
+  height: auto;
+  
+}
+
+h3 {
+  color: white;
+  letter-spacing: 1px;
+  font-size: 24px;
+  margin: 10px;
+}
+
+.containerInput {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  background-color: transparent;
+  width: 88%;
+  height: 35px;
+  border-radius: 8px;
+  padding-right: 10px;
+}
+
+.countryInput {
+  background-color: transparent;
+  width: 100%;
+  height: 35px;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 20px; /* Distância do ícone à borda direita */
+  transform: translateY(-50%);
+  color: white;
+
+}
+
+.countryInput::placeholder {
+  color: white;
+}
+
+button {
+  margin: 8px;
+}

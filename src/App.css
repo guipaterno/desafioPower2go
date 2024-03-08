@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+.left {
+  background: url("./images/sunset.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  height: 100vh;
+}
+
+
