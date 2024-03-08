@@ -1,6 +1,7 @@
+
 import { CardHistory } from "./CardHistory";
 import styles from "./Header.module.css";
-import { SelectCountry } from "./SelectCountry.";
+import { SelectCountry } from "./SelectCountry";
 
 export function Header() {
   return (
@@ -21,6 +22,7 @@ export function Header() {
     </header>
     <SelectCountry/>
     <CardHistory/>
+    
     </div>
 
   );
