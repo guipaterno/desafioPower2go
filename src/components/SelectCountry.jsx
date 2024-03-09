@@ -1,23 +1,29 @@
 import styles from "./SelectCountry.module.css";
 
-export function SelectCountry() {
+export function SelectCountry({ name, flag, population, capital,currencies}) {
   return (
     <div className={styles.container}>
-      <p>TITULO DO PAIS</p>
+      <p>{name}</p>
       <div className={styles.content}>
         <div className={styles.contentFlag}>
-          <img src="https://flagcdn.com/w320/br.png" alt="" />
+          <img src={flag} alt="" />
         </div>
         <div className={styles.contentInfo}>
           <span>
-            População: <p>10000</p>
+            População: <p>{population}</p>
           </span>
           <br />
-          <span>Capital: <p>Brasilia</p></span>
+          <span>
+            Capital: <p>{capital}</p>
+          </span>
           <br />
-          <span>Idioma: <p>Português</p></span>
+          <span>
+            Idioma: <p></p>
+          </span>
           <br />
-          <span>Moeda: <p>Real</p></span>
+          <span>
+            Moeda: <p>{currencies}</p>
+          </span>
           <br />
         </div>
       </div>
