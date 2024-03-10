@@ -19,7 +19,7 @@ export function Header() {
         </ul>
        
       </header>
-      <SelectCountry/>
+      <SelectCountry />
       <CardHistory />
     </div>
   );

@@ -1,34 +1,56 @@
-import styles from "./Search.module.css";
+
+import { useState, useEffect } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
 import axios from "axios";
-import { useState } from "react";
-import { Header } from "./Header";
+
 import { SelectCountry } from "./SelectCountry";
+import styles from "./Search.module.css";
 
 export function Search() {
   const [countryName, setCountryName] = useState("");
-
   const [country, setCountry] = useState({
     name: "",
     flag: "",
     population: "",
     capital: "",
-    //language: "",
-    currencies: "",
+    currencies: [],
   });
+
+    useEffect(() => {
+    if (countryName) {
+      searchCountry();
+    }
+  }, [countryName]);
 
   const searchCountry = () => {
     axios
       .get(`https://restcountries.com/v3.1/name/${countryName}`)
       .then((response) => {
+        const data = response.data[0];
+        const currencies = [];
+        
+        for (const currencyCode in data.currencies) {
+         
+          const currencyName = data.currencies[currencyCode].name;
+          currencies.push(currencyName);
+        }
+
+        const languages = [];
+        
+        for (const languageCode in data.languages) {
+         
+          const languagesName = data.languages[languageCode];
+          languages.push(languagesName);
+        }
+        
         setCountry({
-          name: response.data[0].name.common,
-          flag: response.data[0].flags.svg,
-          population: response.data[0].population,
-          capital: response.data[0].capital[0],
-          //language: response.data[0].languages,
-          currencies: response.data[0].currencies.name,
+          name: data.name.common,
+          flag: data.flags.svg,
+          population: data.population,
+          capital: data.capital[0],
+          languages:languages.join(", "),
+          currencies: currencies.join(", "), 
         });
       })
       .catch((error) => {
@@ -59,8 +81,12 @@ export function Search() {
         flag={country.flag}
         population={country.population}
         capital={country.capital}
+        languages={country.languages}
         currencies={country.currencies}
       />
     </div>
   );
 }
+
+
+

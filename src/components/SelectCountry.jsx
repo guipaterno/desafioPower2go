@@ -1,6 +1,6 @@
 import styles from "./SelectCountry.module.css";
 
-export function SelectCountry({ name, flag, population, capital,currencies}) {
+export function SelectCountry({ name, flag, population, capital,languages,currencies}) {
   return (
     <div className={styles.container}>
       <p>{name}</p>
@@ -18,7 +18,7 @@ export function SelectCountry({ name, flag, population, capital,currencies}) {
           </span>
           <br />
           <span>
-            Idioma: <p></p>
+            Idioma: <p>{languages}</p>
           </span>
           <br />
           <span>
