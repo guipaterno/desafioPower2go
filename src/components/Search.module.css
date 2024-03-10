@@ -1,5 +1,6 @@
 .form {
  display: flex;
+ position: relative;
  flex-direction: column;
  justify-content: center;
  align-items: center;
@@ -20,7 +21,7 @@ h3 {
   display: inline-block;
   align-items: center;
   background-color: transparent;
-  width: 88%;
+  width: 30vw;
   height: 35px;
   border-radius: 8px;
   padding-right: 10px;

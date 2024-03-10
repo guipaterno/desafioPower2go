@@ -8,7 +8,7 @@ import { SelectCountry } from "./SelectCountry";
 import styles from "./Search.module.css";
 
 export function Search() {
-  const [countryName, setCountryName] = useState("");
+  const [countryName, setCountryName] = useState("Brasil");
   const [country, setCountry] = useState({
     name: "",
     flag: "",

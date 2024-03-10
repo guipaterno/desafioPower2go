@@ -1,10 +1,5 @@
+
 .container {
-  display: flex;
-}
-
-
-
-.left {
   background-image: url("./images/sunset.jpg");
   opacity: 0.9;
   background-size: cover;
@@ -12,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60vw;
+  width: 100vw;
   height: 100vh;
   
 }
