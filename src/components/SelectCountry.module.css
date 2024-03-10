@@ -4,7 +4,7 @@
   width: 40vw;
   height: 10000px;
   border-radius: 20px;
-  background-color:  rgba(15, 12, 12, 0.4);;
+  background-color: rgba(15, 12, 12, 0.4);
   box-shadow: 0px 5px 4px 4px rgba(161, 158, 158, 0.25);
 }
 
@@ -19,20 +19,18 @@
   margin-right: 10px;
 }
 
-span{
+span {
   font-size: 18px;
-
 }
 
-
-p{
+p {
   font-size: 16px;
 }
 
-p, span{
+p,
+span {
   color: white;
   margin-top: 5px;
-
 }
 
 .content {
@@ -61,7 +59,36 @@ p, span{
 img {
   margin-bottom: 15%;
   width: 12vw;
-  
+
   height: auto;
-  
 }
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    width: 70%;
+  }
+  img {
+    margin-bottom: 15%;
+    width: 60%;
+
+    height: auto;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+  }
+  img {
+    margin-bottom: 15%;
+    width: 60%;
+
+    height: auto;
+  }
+}
+
+
+
+
+

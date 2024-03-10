@@ -56,3 +56,19 @@ button {
 
 
 
+@media only screen and (max-width: 1200px) {
+  
+  .containerInput {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    width: 330px;
+    height: 35px;
+    border-radius: 8px;
+    padding-right: 10px;
+  }
+}
+
+
+
