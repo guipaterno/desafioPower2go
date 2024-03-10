@@ -7,8 +7,6 @@ import { SelectCountry } from "./SelectCountry";
 import styles from "./Search.module.css";
 import { Download } from "./Download";
 
-
-
 export function Search() {
   const [countryName, setCountryName] = useState("brasil");
   const [country, setCountry] = useState({});
@@ -20,47 +18,49 @@ export function Search() {
     }
   }, []);
 
-    /*consulta de api*/
+  /* Função de busca do país */
+  const searchCountry = async () => {
+    try {
+      const response = await axios.get(
+        `https://restcountries.com/v3.1/name/${countryName}`
+      );
 
-  const searchCountry = () => {
-    axios
-      .get(`https://restcountries.com/v3.1/name/${countryName}`)
-      .then((response) => {
-        const data = response.data[0];
-        const currencies = [];
+      const data = response.data[0];
+      const currencies = [];
 
-        for (const currencyCode in data.currencies) {
-          const currencyName = data.currencies[currencyCode].name;
-          currencies.push(currencyName);
-        }
+      for (const currencyCode in data.currencies) {
+        const currencyName = data.currencies[currencyCode].name;
+        currencies.push(currencyName);
+      }
 
-        const languages = [];
+      const languages = [];
 
-        for (const languageCode in data.languages) {
-          const languagesName = data.languages[languageCode];
-          languages.push(languagesName);
-        }
+      for (const languageCode in data.languages) {
+        const languagesName = data.languages[languageCode];
+        languages.push(languagesName);
+      }
 
-        const newCountry = {
-          name: data.name.common,
-          flag: data.flags.svg,
-          population: data.population,
-          capital: data.capital[0],
-          languages: languages.join(", "),
-          currencies: currencies.join(", "),
-        };
+      const newCountry = {
+        name: data.name.common,
+        flag: data.flags.svg,
+        population: data.population,
+        capital: data.capital[0],
+        languages: languages.join(", "),
+        currencies: currencies.join(", "),
+      };
 
-        setCountry(newCountry);
+      setCountry(newCountry);
 
-        // Armazenamento no localStorage
-        const updatedHistory = [...searchHistory, newCountry];
-        setSearchHistory(updatedHistory);
-        localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
-      })
-      .catch((error) => {
-        alert("Ocorreu um erro ao buscar o país. Por favor, tente novamente mais tarde.");
-        console.log(error);
-      });
+      // Armazenamento no localStorage
+      const updatedHistory = [...searchHistory, newCountry];
+      setSearchHistory(updatedHistory);
+      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+    } catch (error) {
+      alert(
+        "Ocorreu um erro ao buscar o país. Por favor, tente novamente mais tarde."
+      );
+      console.log(error);
+    }
   };
 
   /* Função para download do histórico em CSV */
@@ -75,7 +75,7 @@ export function Search() {
       )
       .join("\n");
 
-     /*Combinação do cabeçalho e do conteúdo*/
+    /*Combinação do cabeçalho e do conteúdo*/
     const csvData =
       "data:text/csv;charset=UTF-8," +
       encodeURIComponent(csvHeader + csvContent);
@@ -89,6 +89,16 @@ export function Search() {
     document.body.removeChild(link);
   };
 
+  /* função para que o botão "enter" sirva como conclusão da busca*/
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      searchCountry();
+    }
+  };
+
+
+  
+
   return (
     <div className={styles.form}>
       <h3>BUSQUE O PAÍS DESEJADO</h3>
@@ -99,6 +109,7 @@ export function Search() {
           onChange={(event) => {
             setCountryName(event.target.value);
           }}
+          onKeyDown={handleKeyPress}
           placeholder="Digite o nome do país"
         />
         <MagnifyingGlass
@@ -107,7 +118,6 @@ export function Search() {
           className={styles.icon}
         />
       </div>
-      
 
       <SelectCountry
         name={country.name}

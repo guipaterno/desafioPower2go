@@ -2,6 +2,8 @@ import styles from "./SelectCountry.module.css";
 
 export function SelectCountry({ name, flag, population, capital,languages,currencies}) {
   return (
+
+    /*Card onde retornam as informações pesquisadas*/
     <div className={styles.container}>
       <p>{name}</p>
       <div className={styles.content}>
