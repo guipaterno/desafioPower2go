@@ -7,21 +7,20 @@ import { SelectCountry } from "./SelectCountry";
 import styles from "./Search.module.css";
 import { Download } from "./Download";
 
+
+
 export function Search() {
-  const [countryName, setCountryName] = useState("Brasil");
-  const [country, setCountry] = useState({
-    name: "",
-    flag: "",
-    population: "",
-    capital: "",
-    currencies: [],
-  });
+  const [countryName, setCountryName] = useState("brasil");
+  const [country, setCountry] = useState({});
+  const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
     if (countryName) {
       searchCountry();
     }
-  }, [countryName]);
+  }, []);
+
+    /*consulta de api*/
 
   const searchCountry = () => {
     axios
@@ -42,18 +41,52 @@ export function Search() {
           languages.push(languagesName);
         }
 
-        setCountry({
+        const newCountry = {
           name: data.name.common,
           flag: data.flags.svg,
           population: data.population,
           capital: data.capital[0],
           languages: languages.join(", "),
           currencies: currencies.join(", "),
-        });
+        };
+
+        setCountry(newCountry);
+
+        // Armazenamento no localStorage
+        const updatedHistory = [...searchHistory, newCountry];
+        setSearchHistory(updatedHistory);
+        localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
       })
       .catch((error) => {
+        alert("Ocorreu um erro ao buscar o país. Por favor, tente novamente mais tarde.");
         console.log(error);
       });
+  };
+
+  /* Função para download do histórico em CSV */
+  const downloadCSV = () => {
+    const csvHeader = "País,Bandeira,População,Capital,Idiomas,Moedas\n";
+
+    /*Conteúdo CSV*/
+    const csvContent = searchHistory
+      .map(
+        (country) =>
+          `"${country.name}","${country.flag}","${country.population}","${country.capital}","${country.languages}","${country.currencies}"`
+      )
+      .join("\n");
+
+     /*Combinação do cabeçalho e do conteúdo*/
+    const csvData =
+      "data:text/csv;charset=UTF-8," +
+      encodeURIComponent(csvHeader + csvContent);
+
+    /* link para download*/
+    const link = document.createElement("a");
+    link.setAttribute("href", csvData);
+    link.setAttribute("download", "search_history.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -74,6 +107,8 @@ export function Search() {
           className={styles.icon}
         />
       </div>
+      
+
       <SelectCountry
         name={country.name}
         flag={country.flag}
@@ -82,7 +117,7 @@ export function Search() {
         languages={country.languages}
         currencies={country.currencies}
       />
-      <Download />
+      <Download onDownloadClick={downloadCSV} />
     </div>
   );
 }
