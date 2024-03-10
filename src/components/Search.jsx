@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
@@ -6,6 +5,7 @@ import axios from "axios";
 
 import { SelectCountry } from "./SelectCountry";
 import styles from "./Search.module.css";
+import { Download } from "./Download";
 
 export function Search() {
   const [countryName, setCountryName] = useState("Brasil");
@@ -17,7 +17,7 @@ export function Search() {
     currencies: [],
   });
 
-    useEffect(() => {
+  useEffect(() => {
     if (countryName) {
       searchCountry();
     }
@@ -29,28 +29,26 @@ export function Search() {
       .then((response) => {
         const data = response.data[0];
         const currencies = [];
-        
+
         for (const currencyCode in data.currencies) {
-         
           const currencyName = data.currencies[currencyCode].name;
           currencies.push(currencyName);
         }
 
         const languages = [];
-        
+
         for (const languageCode in data.languages) {
-         
           const languagesName = data.languages[languageCode];
           languages.push(languagesName);
         }
-        
+
         setCountry({
           name: data.name.common,
           flag: data.flags.svg,
           population: data.population,
           capital: data.capital[0],
-          languages:languages.join(", "),
-          currencies: currencies.join(", "), 
+          languages: languages.join(", "),
+          currencies: currencies.join(", "),
         });
       })
       .catch((error) => {
@@ -84,9 +82,7 @@ export function Search() {
         languages={country.languages}
         currencies={country.currencies}
       />
+      <Download />
     </div>
   );
 }
-
-
-
